@@ -1,0 +1,11 @@
+---
+title: Tuesday morning
+date: "2023-01-27"
+---
+Idag så skerv jag ett prov så jag har inte hunnit gör så mycket. 
+
+<MovingDiv class="movdiv">
+    <img alt ="spaceship" src = "https://static.vecteezy.com/system/resources/previews/008/851/131/original/3d-icon-illustration-space-rocket-png.png"/>
+  </MovingDiv>
+
+  Detta var det jag gjord idag. Jag lade in en bild som är e raket i format va png. Jag gjorde om den till img och alternatig spaceship. Egentliga exakt samma som tidigare bara att jag bytte ut några få saker. 

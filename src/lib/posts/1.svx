@@ -1,20 +1,12 @@
 ---
 title: Post One
-date: "2021-12-14"
+date: "2023-1-12"
 ---
 
 <script>
  let a = 0;
 </script>
 
-Hello, I am _Post One._
-
-**Nice to meet you!**
-
-**sick**
-
-😀 😃 😄 😁 😆 😅 😂
-
-<h1>{a}</h1>
+Jag har ändrat färgen på bordern för komponent class upgrades. Jag ändrade i klass worker och upgrade. 
 
 <button on:click={()=>{a = a + 1}}>CLICK ME</button>

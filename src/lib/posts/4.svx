@@ -1,0 +1,69 @@
+---
+title: Post three
+date: "2023-1-24"
+---
+Idag så har jag kollat runt efter nya användbara saker att sätta in på min webbläsare. Jag hittade då medhjälp av 
+Progress Pico.css en kod som gör att man får en loading bar beroende på hur myket poäng man har. 
+jag lade in den under Article 
+Här är koden
+progress value={clicks} max="200"></progress>
+Här sätter jag ett maxvärde på 200, därefter ska något ske då jag tar mig upp till 200 men jag har inte bestämt än vad. 
+Progress value som då räknas in som clicksen. 
+Jag tänker mig att man kan få in ev en level som säger level 1-2-3 osv för varje gång man nått målet 200 förutom att max värdet ska dubbleras för varje gång man tar sig upp till 200.
+Ev att jag gör en animation då progressbaren tar sig till 200 och sen resettar och även där dubblerar sitt värde. 
+
+Jag gjorde även så att progressbar multiplicerades med 2 efter varje gång max blev uppfylllt(dvs 200)
+Däremot så är problemet att den börjar från det man sluta dvs 200 nu och sedan fortsätter till 400 vilket funkar till en början men sen så blir progressbar helt blå. 
+Detta gjorde jag genom att använda mig av en if sats
+if (clicks == max) {
+      max = max * 2
+    }
+   
+   Jag skrev in 
+ if (clicks == max) {
+      max = max * 2
+      clicks == 0 
+    }
+    För att då ner progressbaren men det var fel..
+    Sen bytte jag till clicks = 0 men då så blev progressbaren helt blå när den nått 200...
+    Till sist så bytta jag ut 
+    if (clicks">" max) {
+      max = max * 2
+    }
+    Se markerat"" till en krokodilklämma som säger att om cliks är större än max gör detta istället för att ha två likamed tecknen. 
+    Efter det så funkar det exekt som jag ville!
+
+    Nu har jag även bytt färg på progressbaren.
+    Denna kod var det jag använde mig utav 
+    progress{
+  background-color:blueviolet;
+  scrollbar-color: black;
+}
+
+progress[value]::-webkit-progress-value {
+  background-image:
+     -webkit-linear-gradient(-45deg, 
+                             transparent 33%, rgba(0, 0, 0, .1) 33%, 
+                             rgba(0,0, 0, .1) 66%, transparent 66%),
+     -webkit-linear-gradient(top, 
+                             rgba(255, 255, 255, .25), 
+                             rgba(0, 0, 0, .25)),
+     -webkit-linear-gradient(left, #09c, #f44);
+
+    border-radius: 2px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+Sen så tyckte jag att det skulle vara snyggare utan att det skiftar flera färger så jag tog bort 
+progress{
+  background-color:blueviolet;
+  scrollbar-color: black;
+}
+progress[value]::-webkit-progress-value {
+  background-color: rgb(49, 4, 70);
+    
+
+    border-radius: 2px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+}
+
+Så snyggt blev det!

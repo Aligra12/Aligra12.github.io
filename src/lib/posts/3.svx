@@ -1,18 +1,26 @@
 ---
 title: Post four
-date: "2021-12-14"
+date: "2023-1-20"
 ---
+Idag har jag bytt bakrunden till en gif animerad med stjärnstoft...
+Jag började med att sätta bg = till null; dvs ingenting
+när man klickar på klickern så sätts bg = till en Url bild som är i form av en gif
+Efter det använde jag mig utan sleep funktionen eftersom att jag inte vill ha gifen igån hela tiden
 
-<script>
- let a = 0;
-</script>
+Sen så gick jag till div class = "game" där den får att information om game dvs storleken på bakgrunden samt orginalfärgen osv. 
+Sen så lägger jag även till background-image:{bg} direkt i div:en.
+Efter det så när man trycker på bg så byts bakgrunden ut till gif som visas medan sleep funktionen "sover". Eftersom att min bakgrund är svart 
+och även gifen så ser man ingen skillnad i bakgrunden. 
 
-Hello, I am _Post One._
+Jag bytte även så att om man "betalade" för en worker så multiplicerades bara den man klickade på och inte båda. 
+Det gjorde jag genom att lägga till en upgrade.cost*=2 under buttom/if längst ner som då gör att värdet på workern eller dublern 
+multipliceras med två om det finns tillräckligt med poäng. Jag tog även bort 
 
-**Nice to meet tjena!**
+Sen så tyckte jag att det skulle bli snyggare att byta plats på Hem och blog som jag även bytte namn på till Min blog.
+Jag gick in på layout.svelte och bytte  margin-left till: 42%; och margin-right till: 15%;
 
-**sick**
-    
-<h1>{a}</h1>
+Samt här där jag simpelt bytte ut namnen till det jag ville ha.
+<li><a href="/">Hem</a></li>
+<li><a href="/devblog">Min blog</a></li>
 
-<button on:click={()=>{a = a + 1}}>CLICK ME</button>
+

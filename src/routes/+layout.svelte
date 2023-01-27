@@ -7,8 +7,8 @@
 
   <style>
     nav {
-      margin-left: 10%;
-      margin-right: 10%;
+      margin-left: 42%;
+      margin-right: 15%;
     }
   </style>
 </svelte:head>
@@ -16,7 +16,7 @@
 <nav>
   <ul>
     <li><a href="/">Hem</a></li>
-    <li><a href="/devblog">Blog</a></li>
+    <li><a href="/devblog">Min blog</a></li>
   </ul>
 </nav>
 

@@ -1,0 +1,199 @@
+---
+title: Tester
+date: "2023-1-25"
+---
+Idag har jag lagt in lite ljud till min webbläsare. 
+Jag börjdade med att kolla på Svelte efter tips.
+Det slutade med att jag hittade en perfekt kod att använda mig av. 
+
+<script>
+  import AudioPlayer, { stopAll } from './AudioPlayer.svelte'
+
+  let audioTracks = [
+    'https://sveltejs.github.io/assets/music/strauss.mp3',
+  ]
+</script>
+
+<button on:click={stopAll}>
+  Stop all!                       --Stoppar musiken då man trycker på knappen
+</button>
+
+{#each audioTracks as src}
+  <AudioPlayer {src} />
+{/each}
+
+Denna kod fick jag sen placera ut innanför min skript och button. 
+Efter det så var jag tvungen att göra en ny fil med namnet AudioPlayer.svelte
+Där i lade jag in en ny kod som ser ut såhär...
+
+<script context="module">
+  const players = new Set()
+
+  export function stopAll() {
+    players.forEach(p => p.pause())
+  }
+</script>
+
+<script>
+  import { onMount } from 'svelte'
+
+  export let src
+  
+  let player
+
+  onMount(() => {
+    // Like players.push(player)
+    players.add(player)
+  })
+</script>
+
+<div>
+	<audio
+		bind:this={player}
+		{src}
+		controls>
+		<track kind="captions" />
+	</audio>
+</div>
+Just nu så överväger jag om jag ska byta musik till ett mer space aktigt tema eller behålla denna lugna och fridfulla musik.
+
+Jag valde även att lägga till en lila rektangel över Stop all för jag tyckte det skulle bli snyggt det gjorde jag genom
+att använda mig av denna kod
+
+ .Stop {
+    width: 100%;
+    height: 100%;
+    border: 15px solid rgb(40, 22, 68);
+    background-color: rgb(7, 7, 7);
+    place-items: center;
+    place-content: center;
+    display: flex;       
+  }
+
+  sen när jag bestämt färg storlek osv så var det bara att lägga till en div class under articel med namnet jag döpte classen Till
+  dvs Stop
+  <div class="Stop"></div>
+
+
+  Jag bytte även namn Från Stop all! till Pausa musiken
+  Det gjorde jag enkelt genom att ändra från
+  
+  <button on:click={stopAll}>
+    Stop all!
+
+    till
+    
+  <button on:click={stopAll}>
+    Pausa musiken
+
+
+
+    jag valde även att lägga till en funktion med en bild som rör på sig om man rör den med musen. Koden fick jag från
+    Svelte som var denna...
+
+    <script>
+	// Example of svelte-moving-div component.
+	// After 'npm install svelte-moving-div' you can use it :
+	// import MovingDiv from 'svelte-moving-div';
+	import MovingDiv from './MovingDiv.svelte';
+	
+	// Github button
+	import GithubBtn from './GithubBtn.svelte';
+</script>
+
+<MovingDiv>
+	<h1>Hello World !</h1>
+</MovingDiv>
+
+<GithubBtn />
+
+<style>
+	/* Bigger margin */
+	:global(.moving-div) {
+		padding: 2rem 5rem
+	}
+	
+	/* Custom transition speed */
+	:global(.moving-div > .inner-div) {
+		transition: transform .25s!important
+	}
+</style>
+
+sen gjorde jag en ny fil och lade in denna kod
+
+<div
+  bind:this={movingDiv}
+  on:mouseenter={trackMouse}
+  on:mousemove={updatePosition}
+  on:mouseleave={resetPosition}
+  class="moving-div"
+>
+  <div bind:this={innerDiv} class="inner-div">
+    <slot />
+  </div>
+</div>
+
+<script>
+let mouse = {
+  x: 0,
+  y: 0
+};
+
+let movingDiv,
+  innerDiv
+
+// Track the mouse when it hover the moving div
+function trackMouse() {
+  movingDiv.addEventListener('mousemove', setMouse);
+}
+
+function setMouse(event) {
+  mouse.x = event.clientX;
+  mouse.y = event.clientY;
+}
+
+function updatePosition() {
+  if (isHover(movingDiv)) {
+    const { top, left } = movingDiv.getBoundingClientRect(),
+      centerX = left + movingDiv.offsetWidth / 2,
+      centerY = top + movingDiv.offsetHeight / 2,
+      elPosX = (mouse.x - centerX) / 2,
+      elPosY = (mouse.y - centerY) / 2;
+
+    innerDiv.style.transform = `translate3d(${elPosX}px, ${elPosY}px, 0)`;
+    requestAnimationFrame(updatePosition);
+  } else {
+    resetPosition();
+  }
+}
+// Reset the moving div postion.
+function resetPosition() {
+  movingDiv.removeEventListener('mousemove', setMouse);
+  innerDiv.style.transform = 'translate3d(0, 0, 0)';
+}
+
+// Return if the given element is hovered
+function isHover(e) {
+  return e.parentElement.querySelector(':hover') === e;
+}
+
+</script>
+
+<style>
+.moving-div {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.moving-div > .inner-div {
+  position: relative;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  transition: transform .25s;
+}
+</style>
+
+Just nu så är det en text inlagd som jag sen bytte till ett rymdskepp..
+
+
+
