@@ -5,18 +5,25 @@
 <svelte:head>
   <link rel="stylesheet" href="/pico.min.css" />
 
+
+</svelte:head>
   <style>
     nav {
-      margin-left: 42%;
+      margin-left: 40%;
       margin-right: 15%;
+      
+      
     }
-  </style>
-</svelte:head>
+    a{
+      color: black;
+    }
 
+    
+  </style>
 <nav>
   <ul>
-    <li><a href="/">Hem</a></li>
-    <li><a href="/devblog">Min blog</a></li>
+    <li><a href="/hemsida">Hem</a></li>
+    <li><a href="/Info">Floorball and more</li>
   </ul>
 </nav>
 
