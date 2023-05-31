@@ -3,7 +3,7 @@
 <script>
      import "prism-themes/themes/prism-one-dark.css"; /*kan ta bort sen denna är med till länken längs ner i dokumentet nav..*/
     import { query_selector_all } from "svelte/internal";
-	let cart = [];
+	let cart = []; /*lista med alla produkter, namn, pris men även bildlänk och id*/
 	let products = [
 		{id: 1, name: "Innebandyklubba", adress:"/klubba1", image: "https://media.viskan.com/v2/klubbhusetprod/list/OXD-52310058_Bleached%20Red-Black_1_Oxdog%20Innebandyklubba%20Hyperlight%20HES%2027%20-%20OptiLight%2023-24.jpg", price: 1800, quantity: 1}, //kostnaden // dock så syns inget utav namnen just nu men det gör inget ännu 3 maj // löste problemet det var att färgen för texten var vit och syntes inte.
         {id: 2, name: "Innebandyklubba", adress:"/klubba2", image: "https://media.viskan.com/v2/klubbhusetprod/original/OXD-52310114_White-Gold_1_Oxdog%20Innebandyklubba%20Ultralight%20HES%2027%20-%20FSL%2023-24.jpg", price: 1600, quantity: 1},  
@@ -15,7 +15,7 @@
         {id: 8, name: "grepplinda", adress:"/linda2",image: "https://media.viskan.com/v2/klubbhusetprod/original/KH165001-1_Vit_1_KH%20Overgrip.jpg", price: 150, quantity: 1}, //kostnaden // dock så syns inget utav namnen just nu men det gör inget ännu 3 maj // löste problemet det var att färgen för texten var vit och syntes inte.
         {id: 9, name: "grepplinda", adress:"/linda3", image: "https://media.viskan.com/v2/klubbhusetprod/original/KH165001-1_Svart_1_KH%20Overgrip.jpg", price: 150, quantity: 1}, //kostnaden // dock så syns inget utav namnen just nu men det gör inget ännu 3 maj // löste problemet det var att färgen för texten var vit och syntes inte.
         
-	]
+	] /*input namn personupgifter*/
 	let adress = {
 		namn: "",
 		email:"",
@@ -25,19 +25,19 @@
 		stat:"",
 		pin:"",
 
-	}
-    const addToCart = (product) => {
+	}                     /*pushar till varukorgen*/
+    const addToCart = (product) => {   /*quantity är 1 så när man klickar på plus knappen så läggs en vara till*/
 		for(let item of cart) {
-				if(item.id === product.id) {
-					product.quantity += 1
+				if(item.id === product.id) {  /*kollar om id för item är samma som produkt om det stämmer +1*/
+					product.quantity += 1       /*genom att i listan längst upp att jag gav de ett id så blir det lätt*/
 					cart = cart;
-					return;
+					return;  /*retunerar */
 				}
 		}
 		cart = [...cart, product]
 	}
 	
-	const minusItem = (product) => {
+	const minusItem = (product) => {   /*samma som ovan bara att när du klickar på minusknappen så tar den bort en produkt*/
 		for(let item of cart) {
 				if(item.id === product.id) {
 					if(product.quantity > 1 ) {
@@ -61,11 +61,11 @@
 		}
 	}
 
-	$: total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+	$: total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0) /*tar summan och produkterna*/
 
 	const checkOut = ()=>{
-		alert(JSON.stringify(cart))
-		alert(JSON.stringify(adress))
+		alert(JSON.stringify(cart))   /*skickar ut ett medelande när man klickar på betala så komemr antalet produkter upp som en notis*/
+		alert(JSON.stringify(adress)) /*skickar ut ett medelande fast med all din personliga information*/
 		
 
 	}
@@ -75,30 +75,30 @@
 
 <!--<a class= "klubba1" href="/klubba1"><img src="https://media.viskan.com/v2/klubbhusetprod/list/OXD-52310058_Bleached%20Red-Black_1_Oxdog%20Innebandyklubba%20Hyperlight%20HES%2027%20-%20OptiLight%2023-24.jpg" alt=klubba1 width="263" height="100"></a>-->
 
-<div class="product-list">
+<div class="product-list">  <!--mina produkters lista-->
 	
 	{#each products as product}
 	<div>
-		<a href={product.adress} ><div class="image" style="background-image: url({product.image})"></div></a>
+		<a href={product.adress} ><div class="image" style="background-image: url({product.image})"></div></a>  <!--länkar bilderna till en ny sida-->
 		
-	<h4>{product.name}</h4> <!--skalar om bilden moment-->  
+	<h4>{product.name}</h4> <!--namn -->  
 	<p>{product.price}kr/st</p>  <!--Lägger till priset och namn-->
 	<button on:click={() => addToCart(product)}>Lägg till i Varukorgen</button> <!--lägger till varukorgs knapparna som sedan läggs till i varukorgen då man klickar på knappen-->
-	</div>
+	</div> 
 	{/each}
 </div>
 
-<div class="cart-list">
-	
+<div class="cart-list">  <!--ny lista för kundvagn-->
+	<!--loop-->
 	{#each cart as item }
 		{#if item.quantity > 0}
-		<div class="cart-item">
-			<img width="50" src={item.image} alt={item.name}/>
-			<div>{item.quantity}
-				<button on:click={() => plusItem(item)}>+</button>
-				<button on:click={() => minusItem(item)}>-</button>
+		<div class="cart-item"> 
+			<img width="50" src={item.image} alt={item.name}/>  <!--bild bredd och namn-->
+			<div>{item.quantity}  <!--antalet produkter-->
+				<button on:click={() => plusItem(item)}>+</button> <!--adderar produkter -->
+				<button on:click={() => minusItem(item)}>-</button> <!--subtraherar produkter-->
 			</div>
-			<p>{item.price * item.quantity}kr</p>
+			<p>{item.price * item.quantity}kr</p> <!-- tar priset på produkten och multiplicerar det med antalet produkter-->
 		</div>
 		{/if}
 	{/each}
@@ -109,10 +109,10 @@
 
 
 <p>Du har {cart.length} produkter i din varukorg</p>
-<div class="shipping-adress"> 
+<div class="shipping-adress">  <!--personuppgifter class-->
 	<div>        <!---Kontaktuppgifter nedan-->
 	<p>Namn</p>
-	<input bind:value={adress.namn}/>
+	<input bind:value={adress.namn}/> <!--kopplar genom binda till p labels / till let adress{}... -->
 
 	<p>Email</p>
 	<input bind:value={adress.email}/> 
@@ -133,12 +133,12 @@
 	<input bind:value={adress.pin} />
 
 	<div>
-		<button on:click={checkOut}>Betala</button>
+		<button on:click={checkOut}>Betala</button>   <!--knapp som sen leds till const checkOut... skickar ut ett meddeland med vad man köpt och sina personupgifter-->
 	</div>
 	
 
 	</div>
-	<div class = "current-adress">
+	<div class = "current-adress">  
 		<p>{adress.namn}</p>
 		<p>{adress.email}</p>
 		<p>{adress.telefonnummer}</p>
